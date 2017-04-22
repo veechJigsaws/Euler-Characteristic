@@ -48,8 +48,14 @@ def random_jig(xstart,ystart,xend,yend,variance):
     else:
         theta=np.arctan(yvar/xvar)  
     svg=np.zeros((18,2)) 
-    pointlist=[(L/4+L/16*rando(v1,v2),0),(3*L/8+L/16*rando(v1,v2),L/8+L/16*rando(v1,v2)),(5*L/16+L/32*rando(v1,v2),2*L/8+L/32*rando(v1,v2)),(8*L/16+3*L/64*rando(v1,v2),5*L/16+L/64*rando(v1,v2)),(11*L/16+3*L/64,4*L/16+L/64*rando(v1,v2)),(10*L/16+L/64*rando(v1,v2),L/8+L/32*rando(v1,v2)),(12*L/16+L/32*rando(v1,v2),0),(L,0)]    
-    slopelist=[0,pi/2,9*pi/16+pi/16*rando(v1,v2),0+pi/16*rando(v1,v2),-9*pi/16+pi/16*rando(v1,v2),-pi/2,0,0]
+    #pointlist=[(L/4+L/16*rando(v1,v2),0),(3*L/8+L/16*rando(v1,v2),L/8+L/16*rando(v1,v2)),(5*L/16+L/32*rando(v1,v2),2*L/8+L/32*rando(v1,v2)),(8*L/16+3*L/64*rando(v1,v2),5*L/16+L/64*rando(v1,v2)),(11*L/16+3*L/64,4*L/16+L/64*rando(v1,v2)),(10*L/16+L/64*rando(v1,v2),L/8+L/32*rando(v1,v2)),(12*L/16+L/32*rando(v1,v2),0),(L,0)]    
+    pointlist=[(.275*L+L*.025*rando(v1,v2),0),(.425*L+.015*L*rando(v1,v2),.05*L+.05*L*rando(v1,v2)),(.375*L+.015*L*rando(v1,v2),.125*L+.025*L*rando(v1,v2))\
+    ,(.5*L+.075*L*rando(v1,v2),.2*L+.01*L*rando(v1,v2)),(.625*L+.015*L*rando(v1,v2),.125*L+.025*L*rando(v1,v2)),(.575*L+.015*L*rando(v1,v2),.05*L+.05*L*rando(v1,v2))\
+    ,(.725*L+.025*L*rando(v1,v2),0),(L,0)]
+    slopelist=[0,pi/2,9*pi/16+pi/16*rando(v1,v2),0+pi/16*rando(v1,v2),-9*pi/16+pi/16*rando(v1,v2),-pi/2,0,0]    
+    if np.random.randint(2)==1:
+        for i in range(len(pointlist)):
+            pointlist[i],slopelist[i]=(pointlist[i][0],-pointlist[i][1]),-slopelist[i]
     for i in range(len(pointlist)):
         phi=slopelist[i]        
         if i==0:
@@ -58,7 +64,8 @@ def random_jig(xstart,ystart,xend,yend,variance):
             svg[i+3]=pointlist[i]
             continue
         else:
-            svg[2*i+2]=[pointlist[i][0]-L/16*np.cos(phi),pointlist[i][1]-L/16*np.sin(phi)]
+            #svg[2*i+2]=[pointlist[i][0]-L/16*np.cos(phi),pointlist[i][1]-L/16*np.sin(phi)]
+            svg[2*i+2]=[pointlist[i][0]-L/25*np.cos(phi),pointlist[i][1]-L/25*np.sin(phi)]
             svg[2*i+3]=pointlist[i]
     count=0    
     for i in svg:
